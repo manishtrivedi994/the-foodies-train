@@ -1,8 +1,10 @@
 import React from 'react';
 import './cssFiles/Signup.css';
 import { BsPerson } from 'react-icons/bs';
+import { withRouter } from 'react-router-dom'
 
-function Signup () {
+const  Signup = (props) => {
+  console.log(props);
     return(
         <div className="login-box">
             {/* <h2>Login</h2> */}
@@ -32,4 +34,4 @@ function Signup () {
     )
 }
 
-export default Signup;
+export default withRouter(Signup);
