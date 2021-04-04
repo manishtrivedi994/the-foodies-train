@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/userModel');
-const Logs = require('../models/logModel')
-
+const User = require('../model/userModel');
 const { promisify } = require('util')
 
 const createTokenSendCookie = function(id, req, res){

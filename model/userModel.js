@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'You should provide your name']
+        required: [true, 'You must provide your name']
     },
 
     email: {
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
 
     role: {
         type: String,
-        enum: ['user', 'admin', 'super-admin'],
+        enum: ['user','vendor', 'admin'],
         default: 'user'
     },
 
