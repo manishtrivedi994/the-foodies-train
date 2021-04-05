@@ -5,7 +5,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 const xss = require('xss-clean')
 const cookieParser= require('cookie-parser')
 
-// const userRouter = require('./routes/userRouter')
+const userRouter = require('./routes/userRouter')
 
 const app = express()
 
@@ -17,8 +17,6 @@ app.use(mongoSanitize())
 
 //data sanitixzation against xss attacks
 app.use(xss())
-
-app.use(express.static(`${__dirname}/public`))
 
 app.use(cookieParser())
 
