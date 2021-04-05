@@ -3,47 +3,45 @@ import './cssFiles/Signup.css';
 import { BsPerson } from 'react-icons/bs';
 import { Redirect, withRouter } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { db } from '../firebase';
 
 const  Signup = (props) => {
-  console.log(props);
     const nameRef = useRef()
     const emailRef = useRef();
+    const phoneRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false)
-    const history = useHistory()
+    
 
     const { signup, currentUser } = useAuth();
     // console.log(currentUser.email)
 
     async function handleSubmit(e) {
       e.preventDefault();
+      console.log("name",nameRef.current.value)
+         console.log("phone",phoneRef.current.value)
+      
       if(passwordRef.current.value !== passwordConfirmRef.current.value) {
         return setError('Passwords do not match!');
       }
       try {
         setError('')
         setLoading(true)
-        // await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
-        //   db.collection('users').doc(cred.user.uid).set({
-        //     name: nameRef.current.value
-        //   })
-        // const cred = await signup(emailRef.current.value, passwordRef.current.value)
-        
-         const sex = db.collection('users').doc('sex')
+        await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
+          return db.collection('users').doc(cred.user.uid).set({
+            name: nameRef.current.value,
+            phone: phoneRef.current.value,
+          })
 
-         await sex.set({
-          first: 'Ada',
-          last: 'Lovelace',
-          born: 1815
-        });
+        })
             
-        console.log(sex)
-        history.push("/login")
+        
+        // history.push("/dashboard")
       } catch (err) {
+        console.log(err)
           if(err.code === 'auth/email-already-in-use') {
               setError('The email address is already in use by another account.')
           }
@@ -75,7 +73,7 @@ const  Signup = (props) => {
                 <label>Email</label>
               </div>
               <div className="user-box">
-                <input type="text" name="" required=""/>
+                <input type="text" name="" ref={phoneRef} required=""/>
                 <label>Phone</label>
               </div>
               <div className="user-box">

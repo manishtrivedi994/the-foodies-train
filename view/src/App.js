@@ -7,7 +7,7 @@ import Home from './components/Home'
 import ForgotPassword from './components/ForgotPassword'
 import UpdateProfile from './components/UpdateProfile'
 import PrivateRoute from './components/PrivateRoute'
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
 
